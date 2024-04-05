@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}
+
+        {% endblock %}
+    </title>
+    <!-- Google Fonts (poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    <!-- Google material fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    {% block style %}
+    {% endblock %}
+
+</head>
+
+<body>
+    {% block nav %}
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="brand"><img src="{% static 'assets/logo.png' %}" alt="UAP IJCIT"></a>
+        <div class="menu-container">
+            <ul class="mega-menu">
+
+                <li class="dropdown">
+                    <div>
+                        <a href="{% url 'home' %}">Home</a>
+
+                    </div>
+
+
+                </li>
+
+                <li class="dropdown">
+                    <div>
+                        <a>About</a>
+                        
+                    </div>
+    </li>
+
+
+
+                <li class="dropdown">
+                    <div>
+                        <a>Media</a>
+                        <span class="material-symbols-outlined">
+                            chevron_right
+                        </span>
+                    </div>
+
+                    <ul class="menu">
+                        <li>
+                            <a href="#">News</a>
+                        </li>
+                        <li>
+                            <a href="#">Events</a>
+                        </li>
+                     
+                        <li>
+                            <a href="#">Notice</a>
+                        </li>
+                     
+                    </ul>
+
+
+                </li>
+
+                <li class="dropdown">
+                    <div>
+                        <a>Club Committee</a>
+                    </div>
+                    
+                </li>
+
+
+                <li class="dropdown">
+                    <div>
+                        <a>Club Gallery</a>
+                        <span class="material-symbols-outlined">
+                            chevron_right
+                        </span>
+                    </div>
+                    <ul class="menu">
+                        <li>
+                            <a href="#"></a>
+                        </li>
+                        <li>
+                            <a href="#">Photo Gallery</a>
+                        </li>
+                        <li>
+                            <a href="# ">Video Gallery</a>
+                        </li>
+                        
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <div>
+                        <a>Contact Us</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="buttons">
+           
+            <button class="btn"><a href="#">Login</a></button>
+
+            <div class="searchBox">
+                <div class="searchToggle">
+                    <i class='bx bx-x cancel'></i>
+                    <i class='bx bx-search search'></i>
+                </div>
+
+                <div class="search-field">
+                    <input type="text" placeholder="Search...">
+                    <i class='bx bx-search'></i>
+                </div>
+            </div>
+            <button class="menu-btn">
+                <span class="material-symbols-outlined">
+                    menu
+                </span>
+            </button>
+        </div>
+    </nav>
+    {% endblock nav %}
+
+    {% block content %} {% endblock content %}
+
+    {% block footer %}
+    <div class="footer"><span>Copyright </span>&copy;<span id="year"> </span> <span>by Film & Photography Club,UAP-CSE. All rights
+            reserved.</span></div>
+
+    {% endblock footer %}
+
+    <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
