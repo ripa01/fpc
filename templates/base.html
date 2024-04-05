@@ -11,6 +11,10 @@
 
         {% endblock %}
     </title>
+    <head>
+        <link rel="icon" type="image/png" href="{% static 'assets/logo01.png' %}"/>
+      </head>
+   
     <!-- Google Fonts (poppins) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +34,7 @@
 <body>
     {% block nav %}
     <nav class="navbar">
-        <a href="{% url 'home' %}" class="brand"><img src="{% static 'assets/logo.png' %}" alt="UAP IJCIT"></a>
+        <a href="{% url 'home' %}" class="brand"><img src="{% static 'assets/logo.png' %}" alt="FPC UAP"></a>
         <div class="menu-container">
             <ul class="mega-menu">
 
