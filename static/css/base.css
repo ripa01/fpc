@@ -40,7 +40,7 @@ a {
     left: 0;
     width: 100%;
     background: #f2e8e5;
-    z-index: 2;
+    z-index: 9999;
 }
 
 .searchToggle {

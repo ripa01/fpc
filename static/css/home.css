@@ -62,7 +62,7 @@
     bottom: 50px;
     left: 50%;
     width: max-content;
-    z-index: 100;
+    z-index: 1;
     display: flex;
     gap: 20px;
 }
@@ -102,7 +102,7 @@
     position: absolute;
     top: 80%;
     right: 52%;
-    z-index: 100;
+    z-index: 1;
     width: 300px;
     max-width: 30%;
     display: flex;

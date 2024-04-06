@@ -11,10 +11,11 @@
 
         {% endblock %}
     </title>
+
     <head>
-        <link rel="icon" type="image/png" href="{% static 'assets/logo01.png' %}"/>
-      </head>
-   
+        <link rel="icon" type="image/png" href="{% static 'assets/logo01.png' %}" />
+    </head>
+
     <!-- Google Fonts (poppins) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,7 +27,9 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
+
     {% block style %}
+
     {% endblock %}
 
 </head>
@@ -50,9 +53,9 @@
                 <li class="dropdown">
                     <div>
                         <a>About</a>
-                        
+
                     </div>
-    </li>
+                </li>
 
 
 
@@ -71,11 +74,11 @@
                         <li>
                             <a href="#">Events</a>
                         </li>
-                     
+
                         <li>
                             <a href="#">Notice</a>
                         </li>
-                     
+
                     </ul>
 
 
@@ -85,7 +88,7 @@
                     <div>
                         <a>Club Committee</a>
                     </div>
-                    
+
                 </li>
 
 
@@ -106,7 +109,7 @@
                         <li>
                             <a href="# ">Video Gallery</a>
                         </li>
-                        
+
                     </ul>
                 </li>
 
@@ -119,7 +122,7 @@
         </div>
 
         <div class="buttons">
-           
+
             <button class="btn"><a href="#">Login</a></button>
 
             <div class="searchBox">
@@ -145,12 +148,16 @@
     {% block content %} {% endblock content %}
 
     {% block footer %}
-    <div class="footer"><span>Copyright </span>&copy;<span id="year"> </span> <span>by Film & Photography Club,UAP-CSE. All rights
+    <div class="footer"><span>Copyright </span>&copy;<span id="year"> </span> <span>by Film & Photography Club,UAP-CSE.
+            All rights
             reserved.</span></div>
 
     {% endblock footer %}
 
     <script src="{% static 'js/main.js' %}"></script>
+    {% block script %}
+
+    {% endblock script %}
 
 </body>
 
