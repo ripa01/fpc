@@ -32,6 +32,8 @@
 
     {% endblock %}
 
+
+
 </head>
 
 <body>
@@ -122,8 +124,13 @@
         </div>
 
         <div class="buttons">
-
-            <button class="btn"><a href="#">Login</a></button>
+            {% if request.user.is_authenticated %}
+            <button class="btn" ><a href="{% url 'logout' %}">Logout</a></button>
+        {% else %}
+            <button class="btn" ><a href="{% url 'login' %}">Login</a></button>
+        {% endif %}
+        
+        
 
             <div class="searchBox">
                 <div class="searchToggle">
@@ -144,6 +151,8 @@
         </div>
     </nav>
     {% endblock nav %}
+
+    {% block msg %} {% endblock msg %}
 
     {% block content %} {% endblock content %}
 
