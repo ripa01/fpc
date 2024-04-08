@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create News{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/news_create.css' %}">
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="main-wrapper">
+    <div class="form-wrapper">
+        <h1>Create news</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn1">Create Post</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

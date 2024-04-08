@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} FPC News
+
+
+{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/news.css' %}">
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="main-wrapper" style=" margin:0%; padding: 0px 20px 0px;">
+
+
+    <div class="form-wrapper">
+        <h1>Call For Papers
+        </h1>
+        <div class="wrapper">
+            <!-- Post preview-->
+            {% for n in news %}
+            <div class="post-preview">
+                
+                <a href="{% url 'news_details' n.id %}">
+                    <h2 class="post-title">{{ n.title }}</h2>
+                    <h3 class="post-subtitle">{{ n.subtitle }}</h3>
+
+                </a>
+                <p class="post-meta">
+                    Posted on {{ n.news_date|date:"F d,Y" }}
+                </p>
+
+    <div class="buttons" style="display: inline-block;">
+   
+        <button class="btn" style="margin-top: 20px;" ><a href="#">Update</a></button>
+        <button class="btn" style="margin-top: 20px;" ><a href="#">Delete</a></button>
+    </div>
+               
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+            
+            <!-- Pager-->
+            <div class="custom-button">
+                <a class="custom-button-link" href="#!">Older Posts →</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-wrapper01">
+<div class = "sidebar01">
+        <h1>Call For Papers
+        </h1>
+        <div class="wrapper">
+            <!-- Post preview-->
+            {% for n in news|slice:":3" %}
+            <div class="post-preview">
+                
+                <a href="{% url 'news_details' n.id %}">
+                    <h2 class="post-title">{{ n.title }}</h2>
+                    <h3 class="post-subtitle">{{ n.subtitle }}</h3>
+
+                </a>
+                <p class="post-meta">
+                    Posted on {{ n.news_date|date:"F d,Y" }}
+                </p>
+               
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+            
+        </div>
+    </div>
+
+    <div class = "sidebar02">
+        <h1>Call For Papers
+        </h1>
+        <div class="wrapper">
+            <!-- Post preview-->
+            {% for n in news|slice:":3" %}
+            <div class="post-preview">
+                
+                <a href="{% url 'news_details' n.id %}">
+                    <h2 class="post-title">{{ n.title }}</h2>
+                    <h3 class="post-subtitle">{{ n.subtitle }}</h3>
+
+                </a>
+                <p class="post-meta">
+                    Posted on {{ n.news_date|date:"F d,Y" }}
+                </p>
+               
+            </div>
+            <!-- Divider-->
+            <hr class="my-4" />
+            {% endfor %}
+            
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+{% endblock content %}
