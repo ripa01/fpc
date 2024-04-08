@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create News{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/news_create.css' %}">
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="main-wrapper">
+    <div class="form-wrapper">
+        <h1>Create news</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> Please correct the following errors:<br>
+                    {% for field, error_list in form.errors.items %}
+                        {{ field }}:
+                        {% for error in error_list %}
+                            {{ error | safe }}<br> {# Use safe filter here #}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                <label for="title" class="form-label">Title:</label>
+                <input type="text" name="title" id="title" class="form-input" />
+            </div>
+            <div class="mb-3">
+                <label for="subtitle" class="form-label">Subtitle:</label>
+                <textarea row="6" name="subtitle" id="subtitle" class="form-input"></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label for="news_image" class="form-label">Upload Image:</label>
+                <input type="file" name="news_image" id="news_image" class="form-control">
+            </div>
+            
+            <div class="mb-3">
+                <label for="content" class="form-label">News Details:</label>
+                <textarea row="100" name="content" id="content" class="form-input"> </textarea>
+                <script>
+                    ClassicEditor
+                        .create(document.querySelector('#content'))
+                        .then(editor => {
+                            console.log(editor);
+                        })
+                        .catch(error => {
+                            console.error(error);
+                        });
+                </script>
+            </div>
+            <button type="submit" class="btn1">Create Post</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}

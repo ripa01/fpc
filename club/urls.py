@@ -7,6 +7,11 @@ urlpatterns =  [
     path('', home_view, name='home'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('about/', about_view, name='about'),
+    path('news/', NewsListView.as_view(), name='news'),
+    path('news/<int:pk>/', NewsDetailView.as_view(), name='news_details'),
+    path('news/new/', NewsCreateView.as_view(), name='news_create'),
+    
 ]
 
 # Serve media files during development

@@ -32,13 +32,11 @@
 
     {% endblock %}
 
-
-
 </head>
 
 <body>
     {% block nav %}
-    <nav class="navbar">
+    <nav class="navbar01">
         <a href="{% url 'home' %}" class="brand"><img src="{% static 'assets/logo.png' %}" alt="FPC UAP"></a>
         <div class="menu-container">
             <ul class="mega-menu">
@@ -54,7 +52,7 @@
 
                 <li class="dropdown">
                     <div>
-                        <a>About</a>
+                        <a href="{% url 'about' %}">About</a>
 
                     </div>
                 </li>
@@ -71,7 +69,7 @@
 
                     <ul class="menu">
                         <li>
-                            <a href="#">News</a>
+                            <a href="{% url 'news' %}">News</a>
                         </li>
                         <li>
                             <a href="#">Events</a>
@@ -152,9 +150,8 @@
     </nav>
     {% endblock nav %}
 
-    {% block msg %} {% endblock msg %}
+    {% block content %}   {% endblock content %}
 
-    {% block content %} {% endblock content %}
 
     {% block footer %}
     <div class="footer"><span>Copyright </span>&copy;<span id="year"> </span> <span>by Film & Photography Club,UAP-CSE.

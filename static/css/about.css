@@ -1,0 +1,36 @@
+.main-content{
+	padding-top: 80px;
+    color: #3d4942;
+    background: #fff;
+    flex: 1;
+}
+.container.body-content{
+	margin-bottom: 2em;
+}
+
+.container.body-content > section{
+	padding-bottom: 0;
+}
+
+
+.page-section{
+	padding-top: 1.5em;
+	padding-bottom: 1.5em;
+}
+
+
+.title-text-uper{text-transform: uppercase;}
+
+h3,
+.list-stats h4.counter{
+	font-family: initial;
+}
+
+.h3, h3{
+	font-size: 1.4rem;
+}
+
+
+h5{
+    color: #9e0a0a;
+}

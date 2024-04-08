@@ -1,6 +1,8 @@
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
+from .models import *
 
 
 def home_view(request):
@@ -30,3 +32,35 @@ def logout_view(request):
     messages.success(request, "Succesfully log out")
     return redirect('/')
 
+
+
+def about_view(request):
+    return render(request, 'about.html')
+
+# def news(request):
+#     context = {
+#         'news' : News.objects.all()
+#     }
+#     return render(request, 'news.html',context)
+
+
+# classbased Views
+class NewsListView(ListView):
+    model = News
+    template_name = 'news02.html' 
+    context_object_name = 'news'
+    ordering = ['news_date']
+
+
+class NewsDetailView(DetailView):
+    model = News
+    template_name = 'news_details.html'
+
+
+class NewsCreateView(CreateView):
+    model = News
+    fields = ['title','subtitle','news_image','content']
+    template_name = 'news_create01.html'
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
