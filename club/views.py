@@ -47,7 +47,7 @@ def about_view(request):
 # classbased Views
 class NewsListView(ListView):
     model = News
-    template_name = 'news02.html' 
+    template_name = 'news.html' 
     context_object_name = 'news'
     ordering = ['news_date']
 
@@ -60,7 +60,7 @@ class NewsDetailView(DetailView):
 class NewsCreateView(CreateView):
     model = News
     fields = ['title','subtitle','news_image','content']
-    template_name = 'news_create01.html'
+    template_name = 'news_create.html'
     def form_valid(self,form):
         form.instance.author = self.request.user
         return super().form_valid(form)
