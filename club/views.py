@@ -54,11 +54,19 @@ class NewsListView(ListView):
 
 class NewsDetailView(DetailView):
     model = News
+    context_object_name = 'object'  
     template_name = 'news_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add recent news items to the context
+        context['recent_news'] = News.objects.order_by('-news_date')[:2]  
+        return context
 
 
 class NewsCreateView(CreateView):
     model = News
+    context_object_name = 'news'
     fields = ['title','subtitle','news_image','content']
     template_name = 'news_create.html'
     def form_valid(self,form):

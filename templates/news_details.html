@@ -4,42 +4,81 @@
 {% endblock title %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/news.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
 {% endblock %}
 
 
 {% block content %}
-<div class="main-wrapper">
-    <div class="form-wrapper">
-      
-        <h2 class="post-title">{{ object.title }}</h2>
-        <div class="wrapper">
+<section class="main-content">
+	<div class="container body-content">
 
-            <div class="post-preview">
-                
+		<!-- Start Widget Section -->
+		<section class="row page-section">
+			<div class="col-sm-8 main-column">
 
-                    <h3 class="post-subtitle">{{ object.subtitle }}</h3>
+				<div class="page-header">
+					<h3> {{ object.title }} </h3>
+					<p><small class="vert-middle feat-color" style="margin-top: 1px;">Posted on {{ object.news_date|date:"F d,Y" }}</small> </p>
 
-                <p class="post-meta">
-                    Posted on {{ object.news_date|date:"F d,Y" }}
-                </p>
-               
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						
+
+
+	                <div id="carouselExampleControls" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+							<div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 318px; left: 0px; display: block; transition: all 1000ms ease 0s; transform: translate3d(0px, 0px, 0px);"><div class="owl-item" style="width: 159px;"><div>
+								<img class="d-block w-100" src="{{ object.news_image.url }}" alt="First slide">
+							</div></div></div></div>
+
+							
+						<div class="owl-controls clickable" style="display: none;"><div class="owl-pagination"><div class="owl-page"><span class=""></span></div></div></div></div>
+
+
+
+						
+						<p></p><p>  {{ object.content|safe }} </p><p></p>
+					</div>
+				</div>
+
+				<hr>
+					
+			</div><!--/.main-column -->
+
+
+
+			<div class="col-sm-4">
+         
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent News </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in recent_news %}
+
+                        <li>
+                            <a href="{% url 'news-details' n.id }">
+                                <img src="{{ n.news_image.url }}" alt="fill">
+                                <div>
+                                    <p><strong>{{ n.title }}</strong> </p>
+                                    <p></p> </br>
+                                    <p>{{ n.subtitle }}</p><br>
+                                    <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
+                                    <p></p>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor%}
+
+                    </ul>
+                </div>
+
             </div>
-            <!-- Divider-->
-            <hr class="my-4" />
-           
-           
-            <div class="post-preview">
-
-                
-            <p class="post-meta"> {{ object.content|safe }}   </p>
-
-            </div>
 
 
-        </div>
+		</section>
 
-    </div>
-</div>
+	</div><!-- /.container -->
+</section>
 
 {% endblock content %}
