@@ -26,8 +26,8 @@
     margin: 40px 0 20px;
 }
 
-.main-content a, .fancybox-skin a {
-    color: #3d4942;
+.main-content a{
+    color: #2e0202;
 }
 a, a h1, a h2, a h3, a h4, a h5, a h6, a strong {
     -webkit-transition: color 200ms ease-in-out;
@@ -96,7 +96,7 @@ p {
 }
 
 .read-more {
-    font-family: 'robotomedium';
+    font-size: large;
 }
 
 .main-content h3{
@@ -158,6 +158,22 @@ img {
 .page-section {
     padding-top: 1.5em;
     padding-bottom: 1.5em;
+}
+
+.main-content.buttons .btn {
+    font-family: 'Poppins', sans-serif;
+    /* font-size: 0.5em; */
+    background: #bbb9b9;
+    padding: 0.5em 1.3em;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    /* gap: 1em; */
+    
+}
+
+.main-content.buttons .btn:hover {
+    background: #a25858;
 }
 
 
