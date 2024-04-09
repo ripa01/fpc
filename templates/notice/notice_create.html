@@ -71,18 +71,18 @@ Create Notice
             <div class="col-sm-4">
                 <!-- Start Widget -->
                 <div class="widget widget-post-thumbs">
-                    <h3 class="title-text-uper"> Recent News </h3>
+                    <h3 class="title-text-uper"> Recent Notice </h3>
                     <ul class="list-post-thumbs">
-                        {% for n in news %}
+                        {% for n in recent_notice %}
 
                         <li>
-                            <a href="{% url 'news-details' n.id }">
-                                <img src="{{ n.news_image.url }}" alt="fill">
+                            <a href="#">
+                                
                                 <div>
                                     <p>{{ n.title }} </p>
                                     <p></p>
-                                    <p>{{ n.subtitle }}</p><br>
-                                    <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
+                                    <p> </p><br>
+                                    <small class="meta-text">{{ n.notice_date|date:"M d,Y" }}</small>
                                     <p></p>
                                 </div>
                             </a>

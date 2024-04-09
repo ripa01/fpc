@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="buttons" style="justify-content: flex-end;"> <button class="btn"><a
-                            href="#">Create New</a></button>
+                            href="{% url 'notice_create' %}">Create New</a></button>
                 </div>
             </div>
         </div>
@@ -25,12 +25,12 @@
 
             <div class="col-sm-8 main-column events-page">
                 <h3 class="title-text-uper"> ALL NOTICE </h3>
-                {% for n in notice %}
+                {% for n in recent_notice %}
                 <article class="row">
                    
                     <div class="col-sm-12">
                         <div class="post-title">
-                            <a href="#" title="event title">
+                            <a href="{% url 'notice_details' n.id %}" title="event title">
                                 <h2>{{ n.title }} </h2>
                             </a>
                             <div class="post-meta">
@@ -76,7 +76,7 @@
                 <div class="widget widget-post-thumbs">
                     <h3 class="title-text-uper"> Recent Notice </h3>
                     <ul class="list-post-thumbs">
-                        {% for n in notice %}
+                        {% for n in recent_notice %}
 
                         <li>
                             <a href="#">
