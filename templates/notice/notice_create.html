@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+{% if notice.id %}
+Update Notice
+{% else %}
+Create Notice
+{% endif %}
+{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/media/create.css' %}">
+<script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="main-content">
+    <div class="container body-content">
+        <!-- Start Widget Section -->
+        <section class="row page-section">
+            <div class="col-sm-8 main-column events-page">
+                {% if notice.id %}
+                <h3 class="title-text-uper"> Update Notice </h3>
+                {% else %}
+                <h3 class="title-text-uper"> Create New Notice </h3>
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> Please correct the following errors:<br>
+                        {% for field, error_list in form.errors.items %}
+                        {{ field }}:
+                        {% for error in error_list %}
+                        {{ error | safe }}<br> {# Use safe filter here #}
+                        {% endfor %}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    <div class="col-sm-12">
+                        <label for="title" class="form-label">Notice Title:</label>
+                        <input type="text" name="title" id="title" class="form-input" value="{{ notice.title }}">
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="content" class="form-label">Notice Details:</label>
+                        <textarea rows="100" name="content" id="content"
+                            class="form-input">{{ notice.content }}</textarea>
+                        <script>
+                            ClassicEditor
+                                .create(document.querySelector('#content'))
+                                .then(editor => {
+                                    console.log(editor);
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        </script>
+                    </div>
+                    <button type="submit" class="btn1">
+                        {% if notice.id %}
+                        Update Notice
+                        {% else %}
+                        Create Notice
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+
+            <div class="col-sm-4">
+                <!-- Start Widget -->
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent News </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in news %}
+
+                        <li>
+                            <a href="{% url 'news-details' n.id }">
+                                <img src="{{ n.news_image.url }}" alt="fill">
+                                <div>
+                                    <p>{{ n.title }} </p>
+                                    <p></p>
+                                    <p>{{ n.subtitle }}</p><br>
+                                    <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
+                                    <p></p>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor%}
+
+                    </ul>
+                </div>
+
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock content %}
