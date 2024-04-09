@@ -49,7 +49,7 @@ class NewsListView(ListView):
     model = News
     template_name = 'news/news.html' 
     context_object_name = 'news'
-    ordering = ['news_date']
+    ordering = ['-news_date']
 
 
 class NewsDetailView(DetailView):
@@ -96,7 +96,7 @@ class NewsUpdateView(UpdateView):
 
 class NewsDeleteView(DeleteView):
     model = News
-    template_name = 'news/news_delete.html'
+    success_url = '/news'
 
 
 # classbased Views For Notice listview,detailsview,createview,updateview,deleteview    

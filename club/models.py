@@ -8,7 +8,7 @@ class News(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=300)
     content = models.TextField()
-    news_image = models.ImageField(upload_to='media/images/', default='media/images/logo.png') 
+    news_image = models.ImageField(upload_to='news/images/', default='media/images/logo.png') 
     news_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
