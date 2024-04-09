@@ -44,7 +44,7 @@ def about_view(request):
 #     return render(request, 'news.html',context)
 
 
-# classbased Views
+# classbased Views For News listview,detailsview,createview,updateview
 class NewsListView(ListView):
     model = News
     template_name = 'news.html' 
@@ -72,3 +72,29 @@ class NewsCreateView(CreateView):
     def form_valid(self,form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add recent news items to the context
+        context['recent_news'] = News.objects.order_by('-news_date')[:2]  
+        return context
+    
+class NewsUpdateView(UpdateView):
+    model = News
+    context_object_name = 'news'
+    fields = ['title','subtitle','news_image','content']
+    template_name = 'news_create.html'
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form) 
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add recent news items to the context
+        context['recent_news'] = News.objects.order_by('-news_date')[:2]  
+        return context  
+
+   
+ 
+    
+    
