@@ -9,12 +9,17 @@
 {% block content %}
 <section class="main-content">
     <div class="container body-content">
+
+        {% if request.user.is_authenticated %}
         <div class="row">
             <div class="col-md-12">
-                <div class="buttons" style="justify-content: flex-end;"> <button class="btn"><a href="{% url 'news_create' %}">Create New</a></button>
+                <div class="buttons" style="justify-content: flex-end;"> <button class="btn"><a
+                            href="{% url 'news_create' %}">Create New</a></button>
                 </div>
             </div>
         </div>
+
+        {% endif %}
         <!-- Start Widget Section -->
         <section class="row page-section">
 
@@ -58,19 +63,23 @@
                             </p>
                             <p></p>
 
+                            {% if request.user.is_authenticated %}
+
                             <div class="buttons">
-                             
-                                <button class="btn" ><a href="#">Update</a></button>
-                         
-                                <button class="btn" ><a href="#">Delete</a></button>
-                          
-                            
-                            </div>                    
+
+                                <button class="btn"><a href="{% url 'news_update' n.id %}">Update</a></button>
+
+                                <button class="btn"><a href="#">Delete</a></button>
+
+
+                            </div>
+
+                            {% endif %}
                         </div>
                     </div>
                 </article>
 
-              
+
 
                 {% endfor %}
 
