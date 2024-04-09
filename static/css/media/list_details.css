@@ -1,0 +1,183 @@
+.main-content {
+    color: #3d4942;
+	background: #fff;
+	flex: 1;
+    padding-top: 100px;
+
+}
+
+.container.body-content {
+    margin-bottom: 2em;
+}
+
+.container.body-content > section {
+    padding-bottom: 0;
+}
+.page-section {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+.hover-box-container {
+    position: relative;
+    overflow: hidden;
+}
+.page-header, .page-title, .post-title {
+    margin: 40px 0 20px;
+}
+
+.main-content a{
+    color: #2e0202;
+}
+a, a h1, a h2, a h3, a h4, a h5, a h6, a strong {
+    -webkit-transition: color 200ms ease-in-out;
+    -moz-transition: color 200ms ease-in-out;
+    -ms-transition: color 200ms ease-in-out;
+    -o-transition: color 200ms ease-in-out;
+    transition: color 200ms ease-in-out;
+    outline: none !important;
+    cursor: pointer;
+    text-decoration: none !important;
+}
+
+.hover-box > img {
+    width: 100%;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.hover-box-content-container {
+    overflow: hidden;
+}
+.hover-box-content-container {
+    position: absolute;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    -webkit-transition: -webkit-transform 0.35s, color 0.35s;
+    transition: transform 0.35s, color 0.35s;
+    margin: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0 10px;
+    z-index: 3;
+}
+
+.hover-box-content, .main-content .hover-box-content{
+	color:#fff
+}
+
+.main-content .post-meta .meta-text{
+
+	color: #bdbdbd;
+}
+
+.post-meta {
+    font-size: 80%;
+    margin-top: -.25em;
+}
+
+.post-meta em{
+	font-family: 'robotolight';
+    font-weight: normal;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+.read-more {
+    font-size: large;
+}
+
+.main-content h3{
+	color: #971c1c;
+
+}
+
+.title-text-uper {
+    text-transform: uppercase;
+}
+h3, .list-stats h4.counter, div.table-price-cell div.price-plan {
+    font-family: initial;
+}
+.h3, h3 {
+    font-size: 1.4rem;
+}
+
+ul {
+    list-style: none;
+}
+ul, ol {
+    padding-left: 0;
+    list-style-position: inside;
+}
+
+.list-post-thumbs li {
+    list-style-type: none;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: .85em;
+    margin-bottom: .85em;
+}
+
+.list-post-thumbs li img {
+    float: left;
+    padding: .25em .5em 0 0;
+    max-width: 24%;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.list-post-thumbs li div p {
+    margin-top: 0;
+    margin-bottom: .2em;
+}
+
+.list-post-thumbs li div p + p {
+    font-size: 90%;
+}
+.list-post-thumbs li div p {
+    margin-top: 0;
+    margin-bottom: .2em;
+}
+
+.container.body-content > section {
+    padding-bottom: 0;
+}
+.page-section {
+    padding-top: 1.5em;
+    padding-bottom: 1.5em;
+}
+
+.main-content.buttons .btn {
+    font-family: 'Poppins', sans-serif;
+    /* font-size: 0.5em; */
+    background: #bbb9b9;
+    padding: 0.5em 1.3em;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    /* gap: 1em; */
+    
+}
+
+.main-content.buttons .btn:hover {
+    background: #a25858;
+}
+
+
+
+
+
+
