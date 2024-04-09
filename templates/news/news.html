@@ -53,14 +53,8 @@
                         <div class="post-excerpt">
                             <p></p>
                             <h4>{{ n.subtitle }}</h4>
-                            <p> {% with content_length=n.content|length %}
-                                {{ n.content|slice:":"|safe }}
-                                {% if content_length > 100 %}
-                                {{ n.content|slice:":20"|safe }}
-                                ...
-                                {% endif %}
-                                {% endwith %}
-                            </p>
+                            <div id="newsContent"> <p>   {{ n.content|safe }}</p></div> 
+                            <a id="readMoreBtn" class="read-more" href="{% url 'news_details' n.id %}">Read More</button>
                             <p></p>
 
                             {% if request.user.is_authenticated %}
@@ -90,3 +84,33 @@
 
 
 {% endblock content %}
+
+{% block script %}
+<script>// You can remove the DOMContentLoaded event listener since we are not manipulating the DOM directly
+    var newsContent = document.getElementById("newsContent");
+    var readMoreBtn = document.getElementById("readMoreBtn");
+    
+    // Hide the excess content initially (This part is optional since the content will be loaded on a different page)
+    var content = newsContent.innerHTML;
+    var maxLength = Math.floor(content.length / 3); // Display only the first third
+    var truncatedContent = content.substring(0, maxLength) + '...';
+    var isTruncated = true;
+    
+    newsContent.innerHTML = truncatedContent;
+    
+    // Redirect to the news details page when the "Read More" button is clicked
+    readMoreBtn.addEventListener("click", function(event) {
+        // Prevent the default behavior of the link
+        event.preventDefault();
+        
+        // Retrieve the URL from the href attribute of the link
+        var url = readMoreBtn.getAttribute("href");
+        
+        // Redirect to the news details page
+        window.location.href = url;
+    });
+    
+</script>
+
+
+{% endblock script %}
