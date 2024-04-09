@@ -28,3 +28,15 @@ class Notice(models.Model):
 
     def get_absolute_url(self):
         return reverse('notice_details',kwargs ={'pk': self.pk})
+    
+
+
+class Committee(models.Model):
+    name = models.CharField(max_length=100)
+    designation = models.CharField(max_length=100)
+    semester = models.CharField(max_length=100)
+    member_image = models.ImageField(upload_to='committee/images/', default='committee/images/logo.png') 
+    
+
+    def __str__(self):
+        return self.name 
