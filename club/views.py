@@ -108,6 +108,18 @@ class NoticeListView(ListView):
     ordering = ['notice_date']
 
 
+class NoticeDetailView(DetailView):
+    model = Notice
+    context_object_name = 'notice'  
+    template_name = 'notice/notice_details.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add recent notice items to the context
+        context['recent_notice'] = Notice.objects.order_by('-notice_date')[:2]  
+        return context
+
+
 
     
     
