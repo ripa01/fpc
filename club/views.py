@@ -97,6 +97,17 @@ class NewsUpdateView(UpdateView):
 class NewsDeleteView(DeleteView):
     model = News
     template_name = 'news/news_delete.html'
- 
+
+
+# classbased Views For Notice listview,detailsview,createview,updateview,deleteview    
+
+class NoticeListView(ListView):
+    model = Notice
+    template_name = 'notice/notice.html' 
+    context_object_name = 'notice'
+    ordering = ['notice_date']
+
+
+
     
     

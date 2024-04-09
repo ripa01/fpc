@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}FPC News{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/media/list_details.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+<section class="main-content">
+    <div class="container body-content">
+
+        {% if request.user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="buttons" style="justify-content: flex-end;"> <button class="btn"><a
+                            href="{% url 'news_create' %}">Create New</a></button>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        <!-- Start Widget Section -->
+        <section class="row page-section">
+
+            <div class="col-sm-8 main-column events-page">
+                <h3 class="title-text-uper"> ALL NOTICE </h3>
+                {% for n in notice %}
+                <article class="row">
+                   
+                    <div class="col-sm-12">
+                        <div class="post-title">
+                            <a href="#" title="event title">
+                                <h2>{{ n.title }} </h2>
+                            </a>
+                            <div class="post-meta">
+                                <em class="date">Posted on {{ n.notice_date|date:"M d,Y" }}</em>
+                            </div>
+                        </div>
+                        <div class="post-excerpt">
+                            <p></p>
+                         
+                            <p>   {{ n.content }} </p>
+                            <p></p>
+
+                            {% if request.user.is_authenticated %}
+
+                            <div class="buttons">
+
+                                <button class="btn"><a href="#">Update</a></button>
+
+                                <button class="btn"><a href="#">Delete</a></button>
+
+
+                            </div>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+
+
+
+                {% endfor %}
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-center"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-sm-4">
+                <!-- Start Widget -->
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent Notice </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in notice %}
+
+                        <li>
+                            <a href="#">
+                                
+                                <div>
+                                    <p>{{ n.title }} </p>
+                                    <p></p>
+                                    <p> </p><br>
+                                    <small class="meta-text">{{ n.notice_date|date:"M d,Y" }}</small>
+                                    <p></p>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor%}
+
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+</section>
+
+
+{% endblock content %}
