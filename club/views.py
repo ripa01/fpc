@@ -1,6 +1,7 @@
 from django.contrib.auth import authenticate, login,logout
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import *
 
@@ -45,6 +46,13 @@ def about_view(request):
 
 
 # classbased Views For News listview,detailsview,createview,updateview,deleteview
+class RecentNewsMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recent_news'] = News.objects.order_by('-news_date')[:2]
+        return context
+    
+
 class NewsListView(ListView):
     model = News
     template_name = 'news/news.html' 
@@ -52,19 +60,14 @@ class NewsListView(ListView):
     ordering = ['-news_date']
 
 
-class NewsDetailView(DetailView):
+class NewsDetailView(RecentNewsMixin , DetailView):
     model = News
     context_object_name = 'news'  
     template_name = 'news/news_details.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Add recent news items to the context
-        context['recent_news'] = News.objects.order_by('-news_date')[:2]  
-        return context
 
 
-class NewsCreateView(CreateView):
+class NewsCreateView(RecentNewsMixin, CreateView):
     model = News
     context_object_name = 'news'
     fields = ['title','subtitle','news_image','content']
@@ -73,13 +76,8 @@ class NewsCreateView(CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
     
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Add recent news items to the context
-        context['recent_news'] = News.objects.order_by('-news_date')[:2]  
-        return context
     
-class NewsUpdateView(UpdateView):
+class NewsUpdateView(RecentNewsMixin, UpdateView):
     model = News
     context_object_name = 'news'
     fields = ['title','subtitle','news_image','content']
@@ -88,17 +86,11 @@ class NewsUpdateView(UpdateView):
         form.instance.author = self.request.user
         return super().form_valid(form) 
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Add recent news items to the context
-        context['recent_news'] = News.objects.order_by('-news_date')[:2]  
-        return context  
-
 class NewsDeleteView(DeleteView):
     model = News
     context_object_name = 'news'
     template_name = 'news/news_delete.html'
-    success_url = '/news'
+    success_url = reverse_lazy('news')
 
 
 # classbased Views For Notice listview,detailsview,createview,updateview,deleteview    
