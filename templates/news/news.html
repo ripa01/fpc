@@ -69,7 +69,7 @@
 
                                 <button class="btn"><a href="{% url 'news_update' n.id %}">Update</a></button>
 
-                                <button class="btn"><a href="#">Delete</a></button>
+                                <button class="btn"   onclick="deleteclassModal()"><a href="{% url 'news_delete' n.id %}">Delete</a></button>
 
 
                             </div>

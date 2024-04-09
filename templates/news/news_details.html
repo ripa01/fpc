@@ -18,8 +18,8 @@
 			<div class="col-sm-8 main-column">
 
 				<div class="page-header">
-					<h3> {{ object.title }} </h3>
-					<p><small class="vert-middle feat-color" style="margin-top: 1px;">Posted on {{ object.news_date|date:"F d,Y" }}</small> </p>
+					<h3> {{ news.title }} </h3>
+					<p><small class="vert-middle feat-color" style="margin-top: 1px;">Posted on {{ news.news_date|date:"F d,Y" }}</small> </p>
 
 				</div>
 
@@ -30,7 +30,7 @@
 
 	                <div id="carouselExampleControls" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
 							<div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 318px; left: 0px; display: block; transition: all 1000ms ease 0s; transform: translate3d(0px, 0px, 0px);"><div class="owl-item" style="width: 159px;"><div>
-								<img class="d-block w-100" src="{{ object.news_image.url }}" alt="First slide">
+								<img class="d-block w-100" src="{{ news.news_image.url }}" alt="First slide">
 							</div></div></div></div>
 
 							
@@ -39,7 +39,7 @@
 
 
 						
-						<p></p><p>  {{ object.content|safe }} </p><p></p>
+						<p></p><p>  {{ news.content|safe }} </p><p></p>
 					</div>
 				</div>
 
