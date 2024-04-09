@@ -16,3 +16,15 @@ class News(models.Model):
 
     def get_absolute_url(self):
         return reverse('news_details',kwargs ={'pk': self.pk})
+
+
+class Notice(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    notice_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('notice_details',kwargs ={'pk': self.pk})
