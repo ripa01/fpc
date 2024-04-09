@@ -46,7 +46,7 @@ Create Notice
                     <div class="col-sm-12">
                         <label for="content" class="form-label">Notice Details:</label>
                         <textarea rows="100" name="content" id="content"
-                            class="form-input">{{ notice.content }}</textarea>
+                            class="form-input">{{ notice.content|safe }}</textarea>
                         <script>
                             ClassicEditor
                                 .create(document.querySelector('#content'))
@@ -87,7 +87,7 @@ Create Notice
                                 </div>
                             </a>
                         </li>
-                        {% endfor%}
+                        {% endfor %}
 
                     </ul>
                 </div>

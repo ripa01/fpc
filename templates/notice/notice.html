@@ -25,7 +25,7 @@
 
             <div class="col-sm-8 main-column events-page">
                 <h3 class="title-text-uper"> ALL NOTICE </h3>
-                {% for n in recent_notice %}
+                {% for n in notice %}
                 <article class="row">
                    
                     <div class="col-sm-12">
@@ -40,7 +40,7 @@
                         <div class="post-excerpt">
                             <p></p>
                          
-                            <p>   {{ n.content }} </p>
+                            <p>   {{ n.content|safe }} </p>
                             <p></p>
 
                             {% if request.user.is_authenticated %}
@@ -90,7 +90,7 @@
                                 </div>
                             </a>
                         </li>
-                        {% endfor%}
+                        {% endfor %}
 
                     </ul>
                 </div>

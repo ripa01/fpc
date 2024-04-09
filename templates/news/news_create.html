@@ -57,7 +57,7 @@
 
                     <div class="col-sm-12">
                         <label for="content" class="form-label">News Details:</label>
-                        <textarea row="100" name="content" id="content" class="form-input">{{ news.content }}</textarea>
+                        <textarea row="100" name="content" id="content" class="form-input">{{ news.content|safe }}</textarea>
                         <script>
                             ClassicEditor
                                 .create(document.querySelector('#content'))
