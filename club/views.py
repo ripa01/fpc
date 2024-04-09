@@ -120,6 +120,21 @@ class NoticeDetailView(DetailView):
         return context
 
 
+class NoticeCreateView(CreateView):
+    model = Notice
+    context_object_name = 'notice'
+    fields = ['title','content']
+    template_name = 'notice/notice_create.html'
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Add recent notice items to the context
+        context['recent_notice'] = Notice.objects.order_by('-notice_date')[:2]  
+        return context
+    
 
     
     
