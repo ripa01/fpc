@@ -23,7 +23,7 @@
         <!-- Start Widget Section -->
         <section class="row page-section">
 
-            <div class="col-sm-8 main-column events-page">
+            <div class="col-sm-12 main-column events-page">
                 <h3 class="title-text-uper"> ALL NOTICE </h3>
                 {% for n in notice %}
                 <article class="row">
@@ -40,16 +40,17 @@
                         <div class="post-excerpt">
                             <p></p>
                          
-                            <p>   {{ n.content|safe }} </p>
+                            <div id="newsContent"> <p>   {{ n.content|safe }}</p></div> 
+                           <a id="readMoreBtn" class="read-more" href="{% url 'notice_details' n.id %}">Read More</button>
                             <p></p>
 
                             {% if request.user.is_authenticated %}
 
-                            <div class="buttons">
+                            <div class="buttons1">
 
-                                <button class="btn"><a href="#">Update</a></button>
+                                <button class="btn1"><a href="#">Update</a></button>
 
-                                <button class="btn"><a href="#">Delete</a></button>
+                                <button class="btn1"><a href="#">Delete</a></button>
 
 
                             </div>
@@ -71,31 +72,6 @@
 
             </div>
 
-            <div class="col-sm-4">
-                <!-- Start Widget -->
-                <div class="widget widget-post-thumbs">
-                    <h3 class="title-text-uper"> Recent Notice </h3>
-                    <ul class="list-post-thumbs">
-                        {% for n in recent_notice %}
-
-                        <li>
-                            <a href="#">
-                                
-                                <div>
-                                    <p>{{ n.title }} </p>
-                                    <p></p>
-                                    <p> </p><br>
-                                    <small class="meta-text">{{ n.notice_date|date:"M d,Y" }}</small>
-                                    <p></p>
-                                </div>
-                            </a>
-                        </li>
-                        {% endfor %}
-
-                    </ul>
-                </div>
-
-            </div>
 
         </section>
 
@@ -104,3 +80,34 @@
 
 
 {% endblock content %}
+
+{% block script %}
+<script>// You can remove the DOMContentLoaded event listener since we are not manipulating the DOM directly
+    var newsContent = document.getElementById("newsContent");
+    var readMoreBtn = document.getElementById("readMoreBtn");
+    
+    // Hide the excess content initially (This part is optional since the content will be loaded on a different page)
+    var content = newsContent.innerHTML;
+    var maxLength = Math.floor(content.length / 3); // Display only the first third
+    var truncatedContent = content.substring(0, maxLength) + '...';
+    var isTruncated = true;
+    
+    newsContent.innerHTML = truncatedContent;
+    
+    // Redirect to the news details page when the "Read More" button is clicked
+    readMoreBtn.addEventListener("click", function(event) {
+        // Prevent the default behavior of the link
+        event.preventDefault();
+        
+        // Retrieve the URL from the href attribute of the link
+        var url = readMoreBtn.getAttribute("href");
+        
+        // Redirect to the news details page
+        window.location.href = url;
+    });
+    
+</script>
+
+
+{% endblock script %}
+
