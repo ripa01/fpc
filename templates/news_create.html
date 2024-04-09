@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Create News{% endblock title %}
+{% block title %}
+    {% if news.id %}
+        Update News
+    {% else %}
+        Create News
+    {% endif %}
+{% endblock title %}
 {% block style %}
-<link rel="stylesheet" href="{% static 'css/news_create.css' %}">
-<script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/news_create.css' %}">
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock %}
 
 {% block content %}
@@ -14,37 +20,44 @@
         <!-- Start Widget Section -->
         <section class="row page-section">
             <div class="col-sm-8 main-column events-page">
-                <h3 class="title-text-uper"> Create New News </h3>
-                <form method="POST">
+                {% if news.id %}
+                    <h3 class="title-text-uper"> Update News </h3>
+                {% else %}
+                    <h3 class="title-text-uper"> Create New News </h3>
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% if form.errors %}
-                    <div class="alert alert-danger">
-                        <strong>Error!</strong> Please correct the following errors:<br>
-                        {% for field, error_list in form.errors.items %}
-                        {{ field }}:
-                        {% for error in error_list %}
-                        {{ error | safe }}<br> {# Use safe filter here #}
-                        {% endfor %}
-                        {% endfor %}
-                    </div>
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Please correct the following errors:<br>
+                            {% for field, error_list in form.errors.items %}
+                                {{ field }}:
+                                {% for error in error_list %}
+                                    {{ error | safe }}<br> {# Use safe filter here #}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
                     {% endif %}
                     <div class="col-sm-12">
                         <label for="title" class="form-label">News Title:</label>
-                        <input type="text" name="title" id="title" class="form-input" />
+                        <input type="text" name="title" id="title" class="form-input" value="{{ news.title }}">
                     </div>
                     <div class="col-sm-12">
                         <label for="subtitle" class="form-label">News Subtitle:</label>
-                        <textarea row="6" name="subtitle" id="subtitle" class="form-input"></textarea>
+                        <textarea row="6" name="subtitle" id="subtitle" class="form-input">{{ news.subtitle }}</textarea>
                     </div>
 
                     <div class="col-sm-12">
                         <label for="news_image" class="form-label">Upload Image:</label>
                         <input type="file" name="news_image" id="news_image" class="form-control">
+                        {% if news.news_image %}
+                            <img src="{{ news.news_image.url }}" alt="News Image">
+                        {% endif %}
                     </div>
 
                     <div class="col-sm-12">
                         <label for="content" class="form-label">News Details:</label>
-                        <textarea row="100" name="content" id="content" class="form-input"> </textarea>
+                        <textarea row="100" name="content" id="content" class="form-input">{{ news.content }}</textarea>
                         <script>
                             ClassicEditor
                                 .create(document.querySelector('#content'))
@@ -56,40 +69,38 @@
                                 });
                         </script>
                     </div>
-                    <button type="submit" class="btn1">Create News</button>
+                    <button type="submit" class="btn1">
+                        {% if news.id %}
+                            Update News
+                        {% else %}
+                            Create News
+                        {% endif %}
+                    </button>
                 </form>
             </div>
 
             <div class="col-sm-4">
-                <!-- Start Widget -->
                 <div class="widget widget-post-thumbs">
                     <h3 class="title-text-uper"> Recent News </h3>
                     <ul class="list-post-thumbs">
-                        {% for n in news %}
-
-                        <li>
-                            <a href="{% url 'news-details' n.id }">
-                                <img src="{{ n.news_image.url }}" alt="fill">
-                                <div>
-                                    <p>{{ n.title }} </p>
-                                    <p></p>
-                                    <p>{{ n.subtitle }}</p><br>
-                                    <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
-                                    <p></p>
-                                </div>
-                            </a>
-                        </li>
-                        {% endfor%}
-
+                        {% for n in recent_news %}
+                            <li>
+                                <a href="{% url 'news_details' n.id %}">
+                                    <img src="{{ n.news_image.url }}" alt="fill">
+                                    <div>
+                                        <p><strong>{{ n.title }}</strong> </p>
+                                        <p></p> </br>
+                                        <p>{{ n.subtitle }}</p><br>
+                                        <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
+                                        <p></p>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
                     </ul>
                 </div>
-
             </div>
-
-
-
         </section>
-
     </div>
 </section>
 {% endblock content %}
