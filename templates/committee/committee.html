@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}FPC Committee{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/media/list_details.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+<section class="main-content">
+    <div class="container body-content">
+
+        {% if request.user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="buttons" style="justify-content: flex-end;"> <button class="btn"><a
+                            href="{% url 'committee_create' %}">Create New</a></button>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        <!-- Start Widget Section -->
+        <section class="row page-section">
+
+            <div class="col-sm-12 main-column events-page">
+                <h3 class="title-text-uper"> ALL COMMITTEE MEMBER </h3>
+                {% for n in member %}
+                <article class="row" style="margin-bottom: 20px;">
+                    <div class="col-sm-4">
+                        <div class="post-image hover-box-container hb-effect-fade post-title">
+                            
+                                <img src="{{ n.member_image.url }}">
+
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="post-title">
+                           
+                                <h2><b>Name:</b>{{ n.name }} </h2>
+                           
+                
+                        <div class="post-excerpt">
+                            <p></p>
+                            <h4><b>Designation:</b>{{ n.designation }}</h4>
+                            <h4><b>Semester:</b>{{ n.semester }}</h4>
+                            
+                            <p></p>
+
+                            {% if request.user.is_authenticated %}
+
+                            <div class="buttons1">
+
+                                <button class="btn1"><a href="{% url 'committee_update' n.id %}">Update</a></button>
+
+                                <button class="btn1"><a href="{% url 'committee_delete' n.id %}">Delete</a></button> 
+
+
+                            </div>
+
+                            {% endif %}
+                        </div>
+                    </div> </div>
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+</section>
+
+
+{% endblock content %}
+
