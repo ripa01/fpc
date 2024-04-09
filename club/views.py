@@ -29,7 +29,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    messages.success(request, "Succesfully log out")
+    # messages.success(request, "Succesfully log out")
     return redirect('/')
 
 
@@ -44,18 +44,18 @@ def about_view(request):
 #     return render(request, 'news.html',context)
 
 
-# classbased Views For News listview,detailsview,createview,updateview
+# classbased Views For News listview,detailsview,createview,updateview,deleteview
 class NewsListView(ListView):
     model = News
-    template_name = 'news.html' 
+    template_name = 'news/news.html' 
     context_object_name = 'news'
     ordering = ['news_date']
 
 
 class NewsDetailView(DetailView):
     model = News
-    context_object_name = 'object'  
-    template_name = 'news_details.html'
+    context_object_name = 'news'  
+    template_name = 'news/news_details.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -68,7 +68,7 @@ class NewsCreateView(CreateView):
     model = News
     context_object_name = 'news'
     fields = ['title','subtitle','news_image','content']
-    template_name = 'news_create.html'
+    template_name = 'news/news_create.html'
     def form_valid(self,form):
         form.instance.author = self.request.user
         return super().form_valid(form)
@@ -83,7 +83,7 @@ class NewsUpdateView(UpdateView):
     model = News
     context_object_name = 'news'
     fields = ['title','subtitle','news_image','content']
-    template_name = 'news_create.html'
+    template_name = 'news/news_create.html'
     def form_valid(self,form):
         form.instance.author = self.request.user
         return super().form_valid(form) 
@@ -94,7 +94,9 @@ class NewsUpdateView(UpdateView):
         context['recent_news'] = News.objects.order_by('-news_date')[:2]  
         return context  
 
-   
+class NewsDeleteView(DeleteView):
+    model = News
+    template_name = 'news/news_delete.html'
  
     
     
