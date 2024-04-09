@@ -6,6 +6,8 @@ from django.views.generic import ListView,DetailView,CreateView,UpdateView,Delet
 from .models import *
 
 
+
+
 def home_view(request):
     return render(request, 'home.html')
 
@@ -30,7 +32,6 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    # messages.success(request, "Succesfully log out")
     return redirect('/')
 
 
@@ -38,14 +39,8 @@ def logout_view(request):
 def about_view(request):
     return render(request, 'about.html')
 
-# def news(request):
-#     context = {
-#         'news' : News.objects.all()
-#     }
-#     return render(request, 'news.html',context)
+# ALL NEWS VIEWS
 
-
-# classbased Views For News listview,detailsview,createview,updateview,deleteview
 class RecentNewsMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -93,7 +88,7 @@ class NewsDeleteView(DeleteView):
     success_url = reverse_lazy('news')
 
 
-# classbased Views For Notice listview,detailsview,createview,updateview,deleteview    
+# ALL NOTICE VIEWS
 
 class NoticeListView(ListView):
     model = Notice
@@ -128,7 +123,13 @@ class NoticeCreateView(CreateView):
         # Add recent notice items to the context
         context['recent_notice'] = Notice.objects.order_by('-notice_date')[:2]  
         return context
-    
 
     
-    
+
+#   Club Committee 
+
+class CommitteeListView(ListView):
+    model = Committee
+    template_name = 'committee/committee.html' 
+    context_object_name = 'member'
+
