@@ -4,13 +4,17 @@ from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import *
+from .forms import *
+from django.core.mail import send_mail
 
+# HOME
 
 def home_view(request):
     recent_news = News.objects.order_by('-news_date')[:2]  
     recent_notice = Notice.objects.order_by('-notice_date')[:2]  
     return render(request, 'home.html', {'recent_news': recent_news , 'recent_notice': recent_notice})
 
+# LOGIN & LOGOUT
 
 def login_view(request):
     if request.method == 'POST':
@@ -36,6 +40,7 @@ def logout_view(request):
     return redirect('/')
 
 
+# ABOUT
 
 def about_view(request):
     return render(request, 'about.html')
@@ -85,22 +90,6 @@ class NewsDeleteView(DeleteView):
 
 
 
-#   Club Committee 
-
-class CommitteeListView(RecentNewsMixin,ListView):
-    model = Committee
-    template_name = 'committee/committee.html' 
-    context_object_name = 'member'
-
-
-class CommitteeUpdateView(RecentNewsMixin, UpdateView):
-    model = Committee
-    context_object_name = 'member'
-    fields = ['name','designation','semester','member_image']
-    template_name = 'committee/edit_committee.html'
-
-
-
 # ALL NOTICE VIEWS
 
 class RecentNoticeMixin:
@@ -142,7 +131,7 @@ class NoticeDeleteView(DeleteView):
     success_url = reverse_lazy('notice')
 
 
-# ALL Event VIEWS 
+# ALL EVENT VIEWS 
 class RecentEventMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -180,6 +169,52 @@ class EventDeleteView(DeleteView):
     template_name = 'event/event_delete.html'
     success_url = reverse_lazy('event')    
        
+
+
+# Club Committee 
+
+class CommitteeListView(RecentNewsMixin,ListView):
+    model = Committee
+    template_name = 'committee/committee.html' 
+    context_object_name = 'member'
+
+
+class CommitteeUpdateView(RecentNewsMixin, UpdateView):
+    model = Committee
+    context_object_name = 'member'
+    fields = ['name','designation','semester','member_image']
+    template_name = 'committee/edit_committee.html'
+
+
+
+# contact
+
+def contact_view(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+
+            # Send email
+            send_mail(
+                subject,
+                f'Name: {name}\nEmail: {email}\nMessage: {message}',
+                email,  # From email
+                ['abc@gmail.com'],  # To email
+                fail_silently=False,
+            )
+            # Optionally, you can redirect to a success page or display a message.
+            # For simplicity, we'll just render the contact form again.
+            form = ContactForm()  # Clear the form
+            return render(request, 'contact.html', {'form': form, 'message_sent': True})
+    else:
+        form = ContactForm()
+    return render(request, 'contact.html', {'form': form})
+
+
 
 
 

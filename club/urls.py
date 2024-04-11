@@ -8,6 +8,7 @@ urlpatterns =  [
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('about/', about_view, name='about'),
+    path('contact/', contact_view, name='contact'),
 
     # NEWS URLS
     path('news/', NewsListView.as_view(), name='news'),
