@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {% if event.id %}
+        Update Event
+    {% else %}
+        Create Event
+    {% endif %}
+{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/media/create.css' %}">
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.2.1/classic/ckeditor.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="main-content">
+    <div class="container body-content">
+        <!-- Start Widget Section -->
+        <section class="row page-section">
+            <div class="col-sm-8 main-column events-page">
+                {% if event.id %}
+                    <h3 class="title-text-uper"> Update Event </h3>
+                {% else %}
+                    <h3 class="title-text-uper"> Create New Event </h3>
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Please correct the following errors:<br>
+                            {% for field, error_list in form.errors.items %}
+                                {{ field }}:
+                                {% for error in error_list %}
+                                    {{ error | safe }}<br> {# Use safe filter here #}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="col-sm-12">
+                        <label for="title" class="form-label">Event Title:</label>
+                        <input type="text" name="title" id="title" class="form-input" value="{{ event.title }}">
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="subtitle" class="form-label">Event Subtitle:</label>
+                        <textarea row="6" name="subtitle" id="subtitle" class="form-input">{{ event.subtitle }}</textarea>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="row">
+                        <div class="col-sm-6">
+                            <label for="start_date" class="form-label">Event Start Date:</label>
+                            <input type="date" id="start_date" name="start_date" class="form-input" value="{{ event.start_date }}">
+                            
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="end_date" class="form-label">Event End Date:</label>
+                            <input type="date" id="end_date" name="end_date" class="form-input" value="{{ event.end_date }}">
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="event_image" class="form-label">Upload Image:</label>
+                        <input type="file" name="event_image" id="event_image" class="form-control">
+                        {% if event.event_image %}
+                            <img src="{{ event.event_image.url }}" alt="Event Image">
+                        {% endif %}
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="content" class="form-label">Event Details:</label>
+                        <textarea row="100" name="content" id="content" class="form-input">{{ event.content|safe }}</textarea>
+                        <script>
+                            ClassicEditor
+                                .create(document.querySelector('#content'))
+                                .then(editor => {
+                                    console.log(editor);
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        </script>
+                    </div>
+                    <button type="submit" class="btn1">
+                        {% if event.id %}
+                            Update Event
+                        {% else %}
+                            Create Event
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent Event </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in recent_event %}
+                            <li>
+                                <a href="{% url 'event_details' n.id %}">
+                                    <img src="{{ n.event_image.url }}" alt="fill">
+                                    <div>
+                                        <p><strong>{{ n.title }}</strong> </p>
+                                        <p></p> </br>
+                                        <p>{{ n.subtitle }}</p><br>
+                                        <small class="meta-text">{{ n.event_date|date:"M d,Y" }}</small>
+                                        <p></p>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock content %}

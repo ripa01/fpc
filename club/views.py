@@ -156,7 +156,7 @@ class EventDetailView(RecentEventMixin , DetailView):
 class EventCreateView(RecentNewsMixin, CreateView):
     model = Event
     context_object_name = 'event'
-    fields = ['title','subtitle','news_image','content', 'start_date' , 'end_date']
+    fields = ['title','subtitle','event_image','content', 'start_date' , 'end_date']
     template_name = 'event/event_create.html'
        
 
