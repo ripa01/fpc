@@ -1,11 +1,10 @@
 from django.contrib.auth import authenticate, login,logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView,DetailView,CreateView,UpdateView,DeleteView
 from .models import *
-
-
 
 
 def home_view(request):
@@ -88,6 +87,23 @@ class NewsDeleteView(DeleteView):
     success_url = reverse_lazy('news')
 
 
+
+#   Club Committee 
+
+class CommitteeListView(RecentNewsMixin,ListView):
+    model = Committee
+    template_name = 'committee/committee.html' 
+    context_object_name = 'member'
+
+
+class CommitteeUpdateView(LoginRequiredMixin, RecentNewsMixin, UpdateView):
+    model = Committee
+    context_object_name = 'member'
+    fields = ['name','designation','semester','member_image']
+    template_name = 'committee/edit_committee.html'
+
+
+
 # ALL NOTICE VIEWS
 
 class NoticeListView(ListView):
@@ -126,10 +142,4 @@ class NoticeCreateView(CreateView):
 
     
 
-#   Club Committee 
-
-class CommitteeListView(RecentNewsMixin,ListView):
-    model = Committee
-    template_name = 'committee/committee.html' 
-    context_object_name = 'member'
 

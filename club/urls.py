@@ -24,6 +24,8 @@ urlpatterns =  [
 
     #Committee URLS
     path('committee/', CommitteeListView.as_view(), name='committee'),
+    path('committee/<int:pk>/update/', CommitteeUpdateView.as_view(), name='committee_update'),
+    
 
 ]
 
