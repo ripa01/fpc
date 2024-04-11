@@ -29,6 +29,7 @@ urlpatterns =  [
     path('notice/<int:pk>/', NoticeDetailView.as_view(), name='notice_details'),
     path('notice/notice/', NoticeCreateView.as_view(), name='notice_create'),
     path('notice/<int:pk>/update/', NoticeUpdateView.as_view(), name='notice_update'),
+    path('notice/<int:pk>/delete/', NoticeDeleteView.as_view(), name='notice_delete'),
     
 
     #Committee URLS

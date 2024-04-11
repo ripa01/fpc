@@ -135,6 +135,13 @@ class NoticeUpdateView(RecentNoticeMixin, UpdateView):
     template_name = 'notice/notice_create.html'    
 
 
+class NoticeDeleteView(DeleteView):
+    model = Notice
+    context_object_name = 'notice'
+    template_name = 'notice/notice_delete.html'
+    success_url = reverse_lazy('notice')
+
+
 # ALL Event VIEWS 
 class RecentEventMixin:
     def get_context_data(self, **kwargs):
