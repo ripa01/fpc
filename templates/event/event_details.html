@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} 
+{{ event.title }}
+{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/media/list_details.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+{% endblock %}
+
+
+{% block content %}
+<section class="main-content">
+	<div class="container body-content">
+
+		<!-- Start Widget Section -->
+		<section class="row page-section">
+			<div class="col-sm-8 main-column">
+
+				<div class="page-header">
+					<h3> {{ event.title }} </h3>
+					<p><small class="vert-middle feat-color" style="margin-top: 1px;">{{ event.start_date|date:"F d,Y" }} - {{ event.end_date|date:"F d,Y" }}</small> </p>
+
+				</div>
+
+				<div class="row">
+					<div class="col-sm-12">
+						
+
+
+	                <div id="carouselExampleControls" class="owl-carousel owl-theme" style="opacity: 1; display: block;">
+							<div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 318px; left: 0px; display: block; transition: all 1000ms ease 0s; transform: translate3d(0px, 0px, 0px);"><div class="owl-item" style="width: 159px;"><div>
+								<img class="d-block w-100" src="{{ event.event_image.url }}" alt="First slide">
+							</div></div></div></div>
+
+							
+						<div class="owl-controls clickable" style="display: none;"><div class="owl-pagination"><div class="owl-page"><span class=""></span></div></div></div></div>
+
+
+
+						
+						<p></p><p>  {{ event.content|safe }} </p><p></p>
+					</div>
+				</div>
+
+				<hr>
+					
+			</div><!--/.main-column -->
+
+
+
+			<div class="col-sm-4">
+         
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent Events </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in recent_event %}
+
+                        <li>
+                            <a href="{% url 'event-details' n.id }">
+                                <img src="{{ n.event_image.url }}" alt="fill">
+                                <div>
+                                    <p><strong>{{ n.title }}</strong> </p>
+                                    <p></p> </br>
+                                    <p>{{ n.subtitle }}</p><br>
+                                    <small class="meta-text">{{ event.start_date|date:"F d,Y" }} - {{ event.end_date|date:"F d,Y" }}</small>
+                                    <p></p>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor%}
+
+                    </ul>
+                </div>
+
+            </div>
+
+
+		</section>
+
+	</div><!-- /.container -->
+</section>
+
+{% endblock content %}
