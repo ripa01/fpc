@@ -16,6 +16,10 @@ urlpatterns =  [
     path('news/<int:pk>/update/', NewsUpdateView.as_view(), name='news_update'),
     path('news/<int:pk>/delete/', NewsDeleteView.as_view(), name='news_delete'),
 
+    # Event URLS
+    path('event/', EventListView.as_view(), name='event'),
+
+
     # NOTICE URLS
     path('notice/', NoticeListView.as_view(), name='notice'),
     path('notice/<int:pk>/', NoticeDetailView.as_view(), name='notice_details'),

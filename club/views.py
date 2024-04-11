@@ -118,7 +118,7 @@ class NoticeListView(ListView):
     model = Notice
     template_name = 'notice/notice.html' 
     context_object_name = 'notice'
-    ordering = ['notice_date']
+    ordering = ['-notice_date']
 
 
 class NoticeDetailView(RecentNoticeMixin,DetailView):
@@ -134,6 +134,14 @@ class NoticeCreateView(RecentNoticeMixin,CreateView):
     template_name = 'notice/notice_create.html'
 
 
-    
+   # ALL Event VIEWS 
+
+class EventListView(ListView):
+    model = Event
+    template_name = 'event/event.html' 
+    context_object_name = 'event'
+    ordering = ['start_date']
+
+
 
 
