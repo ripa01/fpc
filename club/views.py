@@ -10,9 +10,9 @@ from django.core.mail import send_mail
 # HOME
 
 def home_view(request):
-    recent_news = News.objects.order_by('-news_date')[:2]  
-    recent_notice = Notice.objects.order_by('-notice_date')[:2]  
-    return render(request, 'home.html', {'recent_news': recent_news , 'recent_notice': recent_notice})
+    recent_news = News.objects.order_by('news_date')[:2]  
+    recent_event = Event.objects.order_by('-start_date')[:2]  
+    return render(request, 'home.html', {'recent_news': recent_news , 'recent_event': recent_event})
 
 # LOGIN & LOGOUT
 
@@ -58,7 +58,7 @@ class NewsListView(ListView):
     model = News
     template_name = 'news/news.html' 
     context_object_name = 'news'
-    ordering = ['-news_date']
+    ordering = ['news_date']
 
 
 class NewsDetailView(RecentNewsMixin , DetailView):
@@ -143,7 +143,7 @@ class EventListView(ListView):
     model = Event
     template_name = 'event/event.html' 
     context_object_name = 'event'
-    ordering = ['start_date']
+    ordering = ['-start_date']
 
 class EventDetailView(RecentEventMixin , DetailView):
     model = Event

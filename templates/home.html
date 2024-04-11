@@ -66,10 +66,7 @@
             <img src="{% static 'assets/img3.jpg' %}">
             <div class="content">
                 <div class="title">
-                    Name Slider
-                </div>
-                <div class="description">
-                    Description
+                    View Finder Season 4
                 </div>
             </div>
         </div>
@@ -77,33 +74,27 @@
             <img src="{% static 'assets/img4.JPG' %}">
             <div class="content">
                 <div class="title">
-                    Name Slider
+                   View Finder Season 6
                 </div>
-                <div class="description">
-                    Description
-                </div>
+                
             </div>
         </div>
         <div class="item">
             <img src="{% static 'assets/img01.jpg' %}">
             <div class="content">
                 <div class="title">
-                    Name Slider
+                    Photowalk 1
                 </div>
-                <div class="description">
-                    Description
-                </div>
+             
             </div>
         </div>
         <div class="item">
             <img src="{% static 'assets/img2.jpg' %}">
             <div class="content">
                 <div class="title">
-                    Name Slider
+                    View Finder Season 3
                 </div>
-                <div class="description">
-                    Description
-                </div>
+               
             </div>
         </div>
     </div>
@@ -151,30 +142,30 @@
 
 
 			<div class="col-sm-6">
-				<!-- Start Widget -->
-				<div class="widget widget-post-thumbs">
-					<h3 class="title-text-uper"> Recent Notice </h3>
-					<ul class="list-post-thumbs">
-						{% for n in recent_notice %}
+         
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent event </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in recent_event %}
 
-						<li>
-							<a href="#">
+                        <li>
+                            <a href="{% url 'event-details' n.id }">
+                                <img src="{{ n.event_image.url }}" alt="fill">
+                                <div>
+                                    <p><strong>{{ n.title }}</strong> </p>
+                                    <p></p> </br>
+                                    <p>{{ n.subtitle }}</p><br>
+                                    <small class="meta-text">{{ n.start_date|date:"M d,Y" }}</small>
+                                    <p></p>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor%}
 
-								<div>
-									<p>{{ n.title }} </p>
-									<p></p>
-									<p> </p><br>
-									<small class="meta-text">{{ n.notice_date|date:"M d,Y" }}</small>
-									<p></p>
-								</div>
-							</a>
-						</li>
-						{% endfor %}
+                    </ul>
+                </div>
 
-					</ul>
-				</div>
-
-			</div>
+            </div>
 
 
 		</section>
