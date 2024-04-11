@@ -108,6 +108,12 @@ class CommitteeUpdateView(RecentNewsMixin, UpdateView):
 
 # ALL NOTICE VIEWS
 
+class RecentNoticeMixin:
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['recent_notice'] = Notice.objects.order_by('-notice_date')[:2]
+        return context
+
 class NoticeListView(ListView):
     model = Notice
     template_name = 'notice/notice.html' 
@@ -115,32 +121,18 @@ class NoticeListView(ListView):
     ordering = ['notice_date']
 
 
-class NoticeDetailView(DetailView):
+class NoticeDetailView(RecentNoticeMixin,DetailView):
     model = Notice
     context_object_name = 'notice'  
     template_name = 'notice/notice_details.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Add recent notice items to the context
-        context['recent_notice'] = Notice.objects.order_by('-notice_date')[:2]  
-        return context
 
-
-class NoticeCreateView(CreateView):
+class NoticeCreateView(RecentNoticeMixin,CreateView):
     model = Notice
     context_object_name = 'notice'
     fields = ['title','content']
     template_name = 'notice/notice_create.html'
-    def form_valid(self,form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        # Add recent notice items to the context
-        context['recent_notice'] = Notice.objects.order_by('-notice_date')[:2]  
-        return context
+
 
     
 
