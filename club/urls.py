@@ -19,6 +19,7 @@ urlpatterns =  [
     # Event URLS
     path('event/', EventListView.as_view(), name='event'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event_details'),
+    path('event/new/', EventCreateView.as_view(), name='event_create'),
 
 
     # NOTICE URLS
