@@ -10,20 +10,10 @@
 <section class="main-content">
     <div class="container body-content">
 
-        {% if request.user.is_authenticated %}
-        <div class="row">
-            <div class="col-md-12">
-                <div class="buttons" style="justify-content: flex-end;"> <button class="btn"><a
-                            href="{% url 'committee_create' %}">Create New</a></button>
-                </div>
-            </div>
-        </div>
-
-        {% endif %}
         <!-- Start Widget Section -->
         <section class="row page-section">
 
-            <div class="col-sm-12 main-column events-page">
+            <div class="col-sm-8 main-column events-page">
                 <h3 class="title-text-uper"> ALL COMMITTEE MEMBER </h3>
                 {% for n in member %}
                 <article class="row" style="margin-bottom: 20px;">
@@ -55,8 +45,6 @@
 
                                 <button class="btn1"><a href="{% url 'committee_update' n.id %}">Update</a></button>
 
-                                <button class="btn1"><a href="{% url 'committee_delete' n.id %}">Delete</a></button> 
-
 
                             </div>
 
@@ -66,6 +54,33 @@
                 </article>
 
                 {% endfor %}
+
+            </div>
+
+
+			<div class="col-sm-4">
+         
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent News </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in recent_news %}
+
+                        <li>
+                            <a href="{% url 'news-details' n.id }">
+                                <img src="{{ n.news_image.url }}" alt="fill">
+                                <div>
+                                    <p><strong>{{ n.title }}</strong> </p>
+                                    <p></p> </br>
+                                    <p>{{ n.subtitle }}</p><br>
+                                    <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
+                                    <p></p>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor%}
+
+                    </ul>
+                </div>
 
             </div>
 

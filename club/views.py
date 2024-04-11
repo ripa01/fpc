@@ -128,7 +128,7 @@ class NoticeCreateView(CreateView):
 
 #   Club Committee 
 
-class CommitteeListView(ListView):
+class CommitteeListView(RecentNewsMixin,ListView):
     model = Committee
     template_name = 'committee/committee.html' 
     context_object_name = 'member'
