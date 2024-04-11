@@ -8,7 +8,7 @@ class News(models.Model):
     title = models.CharField(max_length=100)
     subtitle = models.CharField(max_length=300)
     content = models.TextField()
-    news_image = models.ImageField(upload_to='news/images/', default='media/images/logo.png') 
+    news_image = models.ImageField(upload_to='news/images/', default='media/logo.jpeg') 
     news_date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
@@ -16,7 +16,22 @@ class News(models.Model):
 
     def get_absolute_url(self):
         return reverse('news_details',kwargs ={'pk': self.pk})
+    
 
+class Event(models.Model):
+    title = models.CharField(max_length=100)
+    subtitle = models.CharField(max_length=300)
+    content = models.TextField()
+    event_image = models.ImageField(upload_to='event/images/', default='media/logo.jpeg') 
+    start_date = models.DateTimeField(default=timezone.now)
+    end_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('event_details',kwargs ={'pk': self.pk})
+    
 
 class Notice(models.Model):
     title = models.CharField(max_length=100)
