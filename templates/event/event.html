@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}FPC Events{% endblock title %}
+{% block style %}
+<link rel="stylesheet" href="{% static 'css/media/list_details.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+<section class="main-content">
+    <div class="container body-content">
+
+        {% if request.user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="buttons" style="justify-content: flex-end;"> <button class="btn"><a
+                            href="{% url 'event_create' %}">Create New</a></button>
+                </div>
+            </div>
+        </div>
+
+        {% endif %}
+        <!-- Start Widget Section -->
+        <section class="row page-section">
+
+            <div class="col-sm-12 main-column events-page">
+                <h3 class="title-text-uper"> ALL event </h3>
+                {% for n in event %}
+                <article class="row" style="margin-bottom: 20px;">
+                    <div class="col-sm-4">
+                        <div class="post-image hover-box-container hb-effect-fade post-title">
+                            <a href="{% url 'event_details' n.id %}" class="hover-box" title="Insert Your Titles">
+                                <img src="{{ n.event_image.url }}">
+
+                                <div class="hover-box-content-container">
+                                    <div class="hover-box-content" style="margin-top: 28px;">
+                                        <em class="fa fa-link"></em>
+                                    </div>
+                                </div>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="post-title">
+                            <a href="{% url 'event_details' n.id %}" title="event title">
+                                <h2>{{ n.title }} </h2>
+                            </a>
+                            <div class="post-meta">
+                                <em class="date">{{ n.start_date|date:"M d,Y" }} - {{ n.end_date|date:"M d,Y" }}</em>
+                            </div>
+                        </div>
+                        <div class="post-excerpt">
+                            <p></p>
+                            <h4>{{ n.subtitle }}</h4>
+                            <div id="eventContent"> <p>   {{ n.content|safe }}</p></div> 
+                            <a id="readMoreBtn" class="read-more" href="{% url 'event_details' n.id %}">Read More</button>
+                            <p></p>
+
+                            {% if request.user.is_authenticated %}
+
+                            <div class="buttons1">
+
+                                <button class="btn1"><a href="{% url 'event_update' n.id %}">Update</a></button>
+
+                                <button class="btn1"><a href="{% url 'event_delete' n.id %}">Delete</a></button> 
+
+
+                            </div>
+
+                            {% endif %}
+                        </div>
+                    </div>
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+        </section>
+
+    </div>
+</section>
+
+
+{% endblock content %}
+
+{% block script %}
+<script>// You can remove the DOMContentLoaded event listener since we are not manipulating the DOM directly
+    var eventContent = document.getElementById("eventContent");
+    var readMoreBtn = document.getElementById("readMoreBtn");
+    
+    // Hide the excess content initially (This part is optional since the content will be loaded on a different page)
+    var content = eventContent.innerHTML;
+    var maxLength = Math.floor(content.length / 5); // Display only the first third
+    var truncatedContent = content.substring(0, maxLength) + '...';
+    var isTruncated = true;
+    
+    eventContent.innerHTML = truncatedContent;
+    
+    // Redirect to the event details page when the "Read More" button is clicked
+    readMoreBtn.addEventListener("click", function(event) {
+        // Prevent the default behavior of the link
+        event.preventDefault();
+        
+        // Retrieve the URL from the href attribute of the link
+        var url = readMoreBtn.getAttribute("href");
+        
+        // Redirect to the event details page
+        window.location.href = url;
+    });
+    
+</script>
+
+
+{% endblock script %}
