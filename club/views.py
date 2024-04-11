@@ -68,9 +68,6 @@ class NewsCreateView(RecentNewsMixin, CreateView):
     context_object_name = 'news'
     fields = ['title','subtitle','news_image','content']
     template_name = 'news/news_create.html'
-    def form_valid(self,form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
     
     
 class NewsUpdateView(RecentNewsMixin, UpdateView):
@@ -78,9 +75,7 @@ class NewsUpdateView(RecentNewsMixin, UpdateView):
     context_object_name = 'news'
     fields = ['title','subtitle','news_image','content']
     template_name = 'news/news_create.html'
-    def form_valid(self,form):
-        form.instance.author = self.request.user
-        return super().form_valid(form) 
+
 
 class NewsDeleteView(DeleteView):
     model = News
@@ -154,6 +149,13 @@ class EventDetailView(RecentEventMixin , DetailView):
     template_name = 'event/event_details.html'  
 
 class EventCreateView(RecentNewsMixin, CreateView):
+    model = Event
+    context_object_name = 'event'
+    fields = ['title','subtitle','event_image','content', 'start_date' , 'end_date']
+    template_name = 'event/event_create.html'
+
+
+class EventUpdateView(RecentNewsMixin, UpdateView):
     model = Event
     context_object_name = 'event'
     fields = ['title','subtitle','event_image','content', 'start_date' , 'end_date']

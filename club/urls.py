@@ -20,6 +20,7 @@ urlpatterns =  [
     path('event/', EventListView.as_view(), name='event'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event_details'),
     path('event/new/', EventCreateView.as_view(), name='event_create'),
+    path('news/<int:pk>/update/', EventUpdateView.as_view(), name='news_update'),
 
 
     # NOTICE URLS
