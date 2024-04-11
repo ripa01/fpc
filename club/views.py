@@ -160,6 +160,12 @@ class EventUpdateView(RecentNewsMixin, UpdateView):
     context_object_name = 'event'
     fields = ['title','subtitle','event_image','content', 'start_date' , 'end_date']
     template_name = 'event/event_create.html'
+
+class EventDeleteView(DeleteView):
+    model = Event
+    context_object_name = 'event'
+    template_name = 'event/event_delete.html'
+    success_url = reverse_lazy('event')    
        
 
 
