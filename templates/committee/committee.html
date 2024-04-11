@@ -17,7 +17,7 @@
                 <h3 class="title-text-uper"> ALL COMMITTEE MEMBER </h3>
                 {% for n in member %}
                 <article class="row" style="margin-bottom: 20px;">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="post-image hover-box-container hb-effect-fade post-title">
                             
                                 <img src="{{ n.member_image.url }}">
@@ -26,20 +26,20 @@
 
                         </div>
                     </div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-9" style="margin-top: 10px;">
                         <div class="post-title">
                            
-                                <h2><b>Name:</b>{{ n.name }} </h2>
+                                <h3>{{ n.name }} </h3>
                            
                 
                         <div class="post-excerpt">
                             <p></p>
-                            <h4><b>Designation:</b>{{ n.designation }}</h4>
-                            <h4><b>Semester:</b>{{ n.semester }}</h4>
+                            <p>{{ n.designation }}</p>
+                            <p>{{ n.semester }}</p>
                             
                             <p></p>
 
-                            {% if request.user.is_authenticated %}
+                            {% if request.user.is_authenticated %} 
 
                             <div class="buttons1">
 
@@ -48,7 +48,7 @@
 
                             </div>
 
-                            {% endif %}
+                             {% endif %} 
                         </div>
                     </div> </div>
                 </article>
