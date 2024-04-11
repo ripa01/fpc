@@ -3,6 +3,8 @@
 {% block title %}FPC Club{% endblock title %}
 {% block style %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link rel="stylesheet" href="{% static 'css/media/list_details.css' %}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 {% endblock %}
 
 
@@ -114,6 +116,71 @@
     <!-- time running -->
     <div class="time"></div>
 </div>
+
+<section class="main-content">
+	<div class="container body-content">
+
+		<!-- Start Widget Section -->
+		<section class="row page-section">
+            <div class="col-sm-6">
+         
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent News </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in recent_news %}
+
+                        <li>
+                            <a href="{% url 'news-details' n.id }">
+                                <img src="{{ n.news_image.url }}" alt="fill">
+                                <div>
+                                    <p><strong>{{ n.title }}</strong> </p>
+                                    <p></p> </br>
+                                    <p>{{ n.subtitle }}</p><br>
+                                    <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
+                                    <p></p>
+                                </div>
+                            </a>
+                        </li>
+                        {% endfor%}
+
+                    </ul>
+                </div>
+
+            </div>
+
+
+
+			<div class="col-sm-6">
+				<!-- Start Widget -->
+				<div class="widget widget-post-thumbs">
+					<h3 class="title-text-uper"> Recent Notice </h3>
+					<ul class="list-post-thumbs">
+						{% for n in recent_notice %}
+
+						<li>
+							<a href="#">
+
+								<div>
+									<p>{{ n.title }} </p>
+									<p></p>
+									<p> </p><br>
+									<small class="meta-text">{{ n.notice_date|date:"M d,Y" }}</small>
+									<p></p>
+								</div>
+							</a>
+						</li>
+						{% endfor %}
+
+					</ul>
+				</div>
+
+			</div>
+
+
+		</section>
+
+	</div><!-- /.container -->
+</section>
 
 {% endblock content %}
 

@@ -1,5 +1,4 @@
 from django.contrib.auth import authenticate, login,logout
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
@@ -8,7 +7,10 @@ from .models import *
 
 
 def home_view(request):
-    return render(request, 'home.html')
+    recent_news = News.objects.order_by('-news_date')[:2]  
+    recent_notice = Notice.objects.order_by('-notice_date')[:2]  
+    return render(request, 'home.html', {'recent_news': recent_news , 'recent_notice': recent_notice})
+
 
 def login_view(request):
     if request.method == 'POST':
@@ -96,7 +98,7 @@ class CommitteeListView(RecentNewsMixin,ListView):
     context_object_name = 'member'
 
 
-class CommitteeUpdateView(LoginRequiredMixin, RecentNewsMixin, UpdateView):
+class CommitteeUpdateView(RecentNewsMixin, UpdateView):
     model = Committee
     context_object_name = 'member'
     fields = ['name','designation','semester','member_image']
