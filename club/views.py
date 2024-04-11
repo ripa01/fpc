@@ -128,8 +128,14 @@ class NoticeCreateView(RecentNoticeMixin,CreateView):
     fields = ['title','content']
     template_name = 'notice/notice_create.html'
 
+class NoticeUpdateView(RecentNoticeMixin, UpdateView):
+    model = Notice
+    context_object_name = 'notice'
+    fields = ['title','content']
+    template_name = 'notice/notice_create.html'    
 
-   # ALL Event VIEWS 
+
+# ALL Event VIEWS 
 class RecentEventMixin:
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

@@ -16,7 +16,7 @@ urlpatterns =  [
     path('news/<int:pk>/update/', NewsUpdateView.as_view(), name='news_update'),
     path('news/<int:pk>/delete/', NewsDeleteView.as_view(), name='news_delete'),
 
-    # Event URLS
+    # EVENT URLS
     path('event/', EventListView.as_view(), name='event'),
     path('event/<int:pk>/', EventDetailView.as_view(), name='event_details'),
     path('event/new/', EventCreateView.as_view(), name='event_create'),
@@ -28,6 +28,7 @@ urlpatterns =  [
     path('notice/', NoticeListView.as_view(), name='notice'),
     path('notice/<int:pk>/', NoticeDetailView.as_view(), name='notice_details'),
     path('notice/notice/', NoticeCreateView.as_view(), name='notice_create'),
+    path('notice/<int:pk>/update/', NoticeUpdateView.as_view(), name='notice_update'),
     
 
     #Committee URLS
