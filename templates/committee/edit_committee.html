@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    {% if member.id %}
+        Update Committee
+    {% endif %}
+{% endblock title %}
+{% block style %}
+    <link rel="stylesheet" href="{% static 'css/media/create.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+
+<section class="main-content">
+    <div class="container body-content">
+        <!-- Start Widget Section -->
+        <section class="row page-section">
+            <div class="col-sm-8 main-column events-page">
+                {% if member.id %}
+                    <h3 class="title-text-uper"> Update Committee </h3>
+                {% endif %}
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% if form.errors %}
+                        <div class="alert alert-danger">
+                            <strong>Error!</strong> Please correct the following errors:<br>
+                            {% for field, error_list in form.errors.items %}
+                                {{ field }}:
+                                {% for error in error_list %}
+                                    {{ error | safe }}<br> {# Use safe filter here #}
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="col-sm-12">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" name="name" id="name" class="form-input" value="{{ member.name }}">
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="designation" class="form-label">Designation:</label>
+                        <textarea row="6" name="designation" id="designation" class="form-input">{{ member.designation }}</textarea>
+                    </div>
+                    <div class="col-sm-12">
+                        <label for="semester" class="form-label">Semester:</label>
+                        <textarea row="6" name="semester" id="semester" class="form-input">{{ member.semester }}</textarea>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <label for="member_image" class="form-label">Upload Image:</label>
+                        <input type="file" name="member_image" id="member_image" class="form-control">
+                        {% if member.member_image %}
+                            <img src="{{ member.member_image.url }}" alt="Committee Image">
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn1">
+                        {% if member.id %}
+                            Update Committee
+                        {% endif %}
+                    </button>
+                </form>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="widget widget-post-thumbs">
+                    <h3 class="title-text-uper"> Recent News </h3>
+                    <ul class="list-post-thumbs">
+                        {% for n in recent_news %}
+                            <li>
+                                <a href="{% url 'news_details' n.id %}">
+                                    <img src="{{ n.news_image.url }}" alt="fill">
+                                    <div>
+                                        <p><strong>{{ n.title }}</strong> </p>
+                                        <p></p> </br>
+                                        <p>{{ n.subtitle }}</p><br>
+                                        <small class="meta-text">{{ n.news_date|date:"M d,Y" }}</small>
+                                        <p></p>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock content %}
