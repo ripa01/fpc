@@ -20,7 +20,7 @@ Welcome to the Film & Photography Club website! This project is created using Py
 4. **Log In Page**
    - Only club committee members can log in using their email and password.
 
-  ![Website loginpage](screenshot/login-page.png)
+  ![Website loginpage](screenshot/login_page.png)
 
     
 
