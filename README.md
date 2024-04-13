@@ -38,7 +38,7 @@ Welcome to the Film & Photography Club website! This project is created using Py
 
    - Notice:
      - Visitors can view a list of notices.
-        ![Website noticepage](screenshot/all-notice-page.png)
+        ![Website noticepage](screenshot/all-notice.png)
        
      - Clicking on a notice item displays the full notice.
      - Sidebar shows recent notices ordered by date.
@@ -60,7 +60,7 @@ Welcome to the Film & Photography Club website! This project is created using Py
       ![Website createpage](screenshot/create-event.png)
 
    - Update:
-      ![Website updatepage](screenshot/create-news.png)
+      ![Website updatepage](screenshot/update.png)
 
    - Delete:
       ![Website deletepage](screenshot/delete-page.png)   
