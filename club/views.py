@@ -17,22 +17,29 @@ def home_view(request):
 # LOGIN & LOGOUT
 
 def login_view(request):
-    if request.method == 'POST':
-        email = request.POST.get('email')
-        password = request.POST.get('psw')
-        
-        user = authenticate(request, username=email, password=password)
-        if user is not None:
-            login(request, user)
-            return redirect('/')
-        else:
-            messages.error(request, "Incorrect email or password!")
-            return redirect('/login')
+     if not request.user.is_authenticated:      
+        if request.method == 'POST':
+            email = request.POST['email']
+            password = request.POST['psw']
 
-    if request.user.is_authenticated:
-        return redirect('/')
-    else:
-        return render(request, 'login.html')
+            if not email.endswith("@uap-bd.edu"):
+                messages.error(request, "Only valid uap-bd.edu accounts are accepted!")
+                return redirect('/login')
+
+            try:
+                user = User.objects.get(email=email)
+            except User.DoesNotExist:
+                messages.error(request, "Unknown email. Please contact administration.")
+                return redirect('/login')
+               
+            if user.check_password(password):
+                login(request, user)
+                return redirect('/')
+            else:
+                messages.error(request, "Incorrect password!")
+                return redirect('/login')
+
+     return render(request, 'login.html')
 
 
 def logout_view(request):
