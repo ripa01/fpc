@@ -99,7 +99,7 @@ jupyterlab-pygments==0.2.2
 jupyterlab-widgets==3.0.7
 kiwisolver==1.4.4
 kneed==0.8.3
-langchain==0.0.305
+langchain==0.1.0
 langsmith==0.0.41
 linkify-it-py==2.0.2
 markdown-it-py==2.2.0
